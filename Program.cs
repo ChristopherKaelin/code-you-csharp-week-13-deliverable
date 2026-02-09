@@ -19,17 +19,9 @@ class Program
 
         while (keepGoing)
         {
-            Console.WriteLine("\n\n");
-
-            Console.WriteLine("  World Regions  ");
-            Console.WriteLine("=================");
-            Console.WriteLine("1. Africa ");
-            Console.WriteLine("2. Americas ");
-            Console.WriteLine("3. Antarctic ");
-            Console.WriteLine("4. Asia ");
-            Console.WriteLine("5. Europe ");
-            Console.WriteLine("6. Oceania ");
-            Console.WriteLine("0. Exit Program ");
+            // Regions menu
+            string[] regions = { "Africa", "Americas", "Antarctic", "Asia", "Europe", "Oceania" };
+            Utilities.DisplayMenu("World Regions", regions);
 
             Console.Write("Select your region: ");
             string regionChoice = Console.ReadLine() ?? "";
@@ -58,16 +50,10 @@ class Program
                 Console.WriteLine($"\n Here are the countries with the {regionName.ToUpper()} region");
 
                 List<Country> allCountries = await FetchCountryNamesByRegion(regionName);
+
                 Console.WriteLine($"Number of countries: {allCountries.Count}");
-                for (int i = 0; i < allCountries.Count; i += 2)
-                {
-                    Console.Write($"{i + 1}. {allCountries[i].name.common.PadRight(30)} ");
-                    if ((i + 1) < allCountries.Count)
-                        Console.WriteLine($"\t{i + 2}. {allCountries[i + 1].name.common} ");
-                    else
-                        Console.WriteLine();
-                }
-                Console.WriteLine("0. Return to main menu ");
+                string[] countries = allCountries.Select(c => c.name.common).ToArray();
+                Utilities.DisplayMenu("Countries", countries, "Return to main menu");
 
                 bool validStateSelected = false;
                 while (!validStateSelected)
@@ -94,9 +80,6 @@ class Program
                         Console.WriteLine($"\t Official: {countryOfficial}");
                         Console.WriteLine($"\t Common: {countryName}");
 
-                        string capitalName = selectedCountry.capital?.Count > 0 ? selectedCountry.capital[0] : "N/A";
-                        Console.WriteLine($" Capital: {capitalName}");
-
                         string subRegion = selectedCountry.subregion ?? "N/A";
                         Console.WriteLine($" Subregion: {subRegion}");
 
@@ -112,11 +95,39 @@ class Program
                         string coatOfArms = selectedCountry.coatOfArms.png ?? "N/A";
                         Console.WriteLine($" Coat of Arms link: {coatOfArms}");
 
+                        string capitalName = selectedCountry.capital?.Count > 0 ? selectedCountry.capital[0] : "N/A";
+                        Console.WriteLine($" Capital: {capitalName}");
+
+                        // Display current local time
+                        DateOnly localDate = DateOnly.FromDateTime(DateTime.Now);
+                        TimeOnly localTime = TimeOnly.FromDateTime(DateTime.Now);
+                        Console.WriteLine($" Current Local Date/Time: {localDate} @ {localTime} ");
+
+                        TimeOnly capitalTime = TimeOnly.MinValue;
+                        DateOnly capitalDate = DateOnly.MinValue;
+                        if (selectedCountry.capitalInfo.latlng.Count > 0)
+                        {
+                            string capitalLat = selectedCountry.capitalInfo.latlng[0].ToString();
+                            string capitalLng = selectedCountry.capitalInfo.latlng[1].ToString();
+                            DateTimeInfo capitalDateTimeInfo = await FetchCapitalTime(capitalLat, capitalLng);
+                            capitalTime = TimeOnly.Parse(capitalDateTimeInfo.time);
+                            capitalDate = DateOnly.Parse(capitalDateTimeInfo.date);
+                        }
+                        Console.WriteLine($" Current Capital Date/Time:{capitalDate} @ {capitalTime.ToString() ?? "UNK"}");
+
+                        // Calculate time difference
+                        DateTime localDateTime = localDate.ToDateTime(localTime);
+                        DateTime capitalDateTime = capitalDate.ToDateTime(capitalTime);
+
+                        TimeSpan timeDifference = capitalDateTime - localDateTime;
+                        int hoursDifference = (int)Math.Round(timeDifference.TotalHours);
+
+                        Console.WriteLine($"Time Difference: {hoursDifference} hours");
+
                         validStateSelected = true;
                         Console.Write("\n Press Enter to return to main menu");
                         Console.ReadLine();
                     }
-
                 }
             }
 
@@ -141,17 +152,30 @@ class Program
 
     static async Task<Country> FetchCountryByName(string countryName)
     {
-        string url = $"https://restcountries.com/v3.1/name/{countryName}?fields=name,capital,tld,subregion,area,flag,population,fifa,timezones,flags,coatOfArms,startOfWeek";
+        string url = $"https://restcountries.com/v3.1/name/{countryName}?fullText=true&fields=name,capital,tld,subregion,area,flag,population,fifa,timezones,flags,coatOfArms,startOfWeek,capitalInfo";
 
-        Console.Write(url);
+        // Console.Write(url);
         using HttpClient client = new HttpClient();
         HttpResponseMessage response = await client.GetAsync(url);
         response.EnsureSuccessStatusCode();
 
         string jsonResponse = await response.Content.ReadAsStringAsync();
-        List<Country> countries = JsonSerializer.Deserialize<List<Country>>(jsonResponse);
+        List<Country> countries = JsonSerializer.Deserialize<List<Country>>(jsonResponse) ?? new List<Country>();
 
         return countries[0]; // API returns array, we want first item
+    }
+
+    static async Task<DateTimeInfo> FetchCapitalTime(string latitude, string longitude)
+    {
+        string url = $"https://timeapi.io/api/v1/time/current/coordinate?latitude={latitude}&longitude={longitude}";
+
+        using HttpClient client = new HttpClient();
+        HttpResponseMessage response = await client.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+
+        string jsonResponse = await response.Content.ReadAsStringAsync();
+        DateTimeInfo timeInfo = JsonSerializer.Deserialize<DateTimeInfo>(jsonResponse);
+        return timeInfo;
     }
 
 }

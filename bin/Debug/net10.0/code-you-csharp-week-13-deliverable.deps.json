@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "code-you-csharp-week-13-deliverable/1.0.0": {
+        "runtime": {
+          "code-you-csharp-week-13-deliverable.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "code-you-csharp-week-13-deliverable/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

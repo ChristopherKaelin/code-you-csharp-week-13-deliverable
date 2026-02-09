@@ -17,4 +17,6 @@ public class Country
     public Flags flags { get; set; } = new Flags();
     public CoatOfArms coatOfArms { get; set; } = new CoatOfArms();
     public string startOfWeek { get; set; } = "UNK";
+    public CapitalInfo capitalInfo { get; set; } = new CapitalInfo();
+
 }

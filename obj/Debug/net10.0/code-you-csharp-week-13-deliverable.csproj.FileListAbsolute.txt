@@ -1,0 +1,15 @@
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\bin\Debug\net10.0\code-you-csharp-week-13-deliverable.exe
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\bin\Debug\net10.0\code-you-csharp-week-13-deliverable.deps.json
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\bin\Debug\net10.0\code-you-csharp-week-13-deliverable.runtimeconfig.json
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\bin\Debug\net10.0\code-you-csharp-week-13-deliverable.dll
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\bin\Debug\net10.0\code-you-csharp-week-13-deliverable.pdb
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\code-you-csharp-week-13-deliverable.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\code-you-csharp-week-13-deliverable.AssemblyInfoInputs.cache
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\code-you-csharp-week-13-deliverable.AssemblyInfo.cs
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\code-you-csharp-week-13-deliverable.csproj.CoreCompileInputs.cache
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\code-you-csharp-week-13-deliverable.sourcelink.json
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\code-you-csharp-week-13-deliverable.dll
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\refint\code-you-csharp-week-13-deliverable.dll
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\code-you-csharp-week-13-deliverable.pdb
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\code-you-csharp-week-13-deliverable.genruntimeconfig.cache
+D:\Documents\Development\Repositories\Code-KY\2025-CSharp\code-you-csharp-week-13-deliverable\obj\Debug\net10.0\ref\code-you-csharp-week-13-deliverable.dll
